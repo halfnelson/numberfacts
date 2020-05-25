@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "ES2015",
+        "baseUrl": "./",
+        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/.*/"
+    ]
+}

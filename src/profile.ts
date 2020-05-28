@@ -1,9 +1,16 @@
 import { writable } from 'svelte/store'
 
+
+export type StatusEntry = {
+    attempts: number,
+    last_attempt_times: number[]
+}
+
 export type Profile = {
     readonly id: string;
     name: string;
     color: string;
+    status: StatusEntry[][]
 }
 
 function profileKey(id: string) {
@@ -13,8 +20,8 @@ function profileKey(id: string) {
 function loadProfile(id: string): Profile {
     try {
         if (id) {
-            let profstr = localStorage.getItem(id);
-            if (profstr) {
+            let profstr = localStorage.getItem(profileKey(id));
+            if (profstr) { 
                 return JSON.parse(profstr)
             }
         }
@@ -75,7 +82,8 @@ export function create_profiles() {
             let profile = {
                 id: String(Date.now()),
                 name,
-                color
+                color, 
+                status: (new Array(12).fill(0)).map((_,idx) => new Array(idx+1).fill(0).map(() => ({ attempts: 0, last_attempt_times: [] } as StatusEntry) ) )
             }
             storeProfile(profile);
             profiles = profiles.concat(profile);

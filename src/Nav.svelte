@@ -2,14 +2,13 @@
     <section class="container">
         <span class="navigation-title">Number Facts</span>
         
-        <span class="navigation-item float-right"><ProfileNav /><span>
+        <span class="navigation-item float-right" on:click={() => nav.navigate("edit-profile") }><ProfileNav /><span>
     </section>
 </nav>
 
 <script>
     import ProfileNav from './ProfileNav.svelte'
-
-
+    import { nav } from './nav'
 </script>
 
 <style>
@@ -23,6 +22,7 @@
 
     .navigation-item {
         position: relative;
+        padding-top: 0.5rem;
     }
 
     .navigation {

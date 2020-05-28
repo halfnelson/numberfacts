@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-export type AppPage = "fresh-install" | "home"
+export type AppPage = "fresh-install" | "home" | "edit-profile"
 
 function create_nav() {
     let { set, subscribe } = writable<AppPage>(null)

@@ -1,11 +1,12 @@
 <script>
 	import { onMount } from 'svelte';
 	import FreshInstall from './FreshInstall.svelte';
-
+	import Home from './Home.svelte';
 	import Nav from './Nav.svelte'
 	import { profile } from './profile'
 	import ProfileManager from './ProfileManager.svelte'
 	import { nav } from './nav'
+import EditProfile from './EditProfile.svelte';
 
 	onMount(() => {
 		if (!$profile) {
@@ -23,7 +24,9 @@
 	{#if $nav == "fresh-install"}
 		<FreshInstall />
 	{:else if $nav == "home"}
-		<h1> Select an activity </h1>
+		<Home />
+	{:else if $nav == "edit-profile"}
+		<EditProfile />
 	{/if}
 </main>
 

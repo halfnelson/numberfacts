@@ -1,13 +1,18 @@
 import { writable } from 'svelte/store'
 
-export type AppPage = "fresh-install" | "home" | "edit-profile"
+export type AppPage = {
+    page: "fresh-install" | "home" | "edit-profile" | "practice",
+    props?: any
+}
+
+
 
 function create_nav() {
-    let { set, subscribe } = writable<AppPage>(null)
+    let { set, subscribe } = writable<AppPage>({page: null})
     return {
         subscribe,
-        navigate(page: AppPage) {
-            set(page)
+        navigate(page: AppPage['page'], props?: any) {
+            set({ page, props})
         }
     }
 }

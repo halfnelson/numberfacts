@@ -1,16 +1,12 @@
 import { writable } from 'svelte/store'
+import { StatusCollection } from './facts';
 
-
-export type StatusEntry = {
-    attempts: number,
-    last_attempt_times: number[]
-}
 
 export type Profile = {
     readonly id: string;
     name: string;
     color: string;
-    status: StatusEntry[][]
+    status: StatusCollection;
 }
 
 function profileKey(id: string) {
@@ -83,7 +79,7 @@ export function create_profiles() {
                 id: String(Date.now()),
                 name,
                 color, 
-                status: (new Array(12).fill(0)).map((_,idx) => new Array(idx+1).fill(0).map(() => ({ attempts: 0, last_attempt_times: [] } as StatusEntry) ) )
+                status: []
             }
             storeProfile(profile);
             profiles = profiles.concat(profile);
@@ -106,5 +102,9 @@ export function create_profiles() {
 const profiles = create_profiles();
 
 
+
+
 export { profile, profiles }
+
+
 

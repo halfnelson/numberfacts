@@ -6,7 +6,8 @@
 	import { profile } from './profile'
 	import ProfileManager from './ProfileManager.svelte'
 	import { nav } from './nav'
-import EditProfile from './EditProfile.svelte';
+	import EditProfile from './EditProfile.svelte';
+	import Practice from './Practice.svelte';
 
 	onMount(() => {
 		if (!$profile) {
@@ -18,21 +19,39 @@ import EditProfile from './EditProfile.svelte';
 
 
 </script>
+<div class="root">
+	<Nav />
+	<main class="container">
+		
+		{#if $nav.page == "fresh-install"}
+			<FreshInstall />
+		{:else if $nav.page == "home"}
+			<Home />
+		{:else if $nav.page == "edit-profile"}
+			<EditProfile />
+		{:else if $nav.page == "practice"}
+			<Practice {...$nav.props} />
+		{/if}
 
-<Nav />
-<main class="container">
-	{#if $nav == "fresh-install"}
-		<FreshInstall />
-	{:else if $nav == "home"}
-		<Home />
-	{:else if $nav == "edit-profile"}
-		<EditProfile />
-	{/if}
-</main>
-
+	</main>
+</div>
 <style>
+
+	.root {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+	}
 	.container {
 		max-width: 80rem;
-		padding-top: 2rem;
+	}
+
+	main {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
 	}
 </style>

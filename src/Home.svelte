@@ -23,15 +23,7 @@
 </div>
 
 <style>
-	button.button-outline {
-		background-color: transparent;
-		color: #444;
-	}
 
-	button {
-		background-color: #444;
-		border-color: #444;
-	}
 
 	.practice {
 		margin-top: 2rem;

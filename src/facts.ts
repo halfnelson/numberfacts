@@ -30,9 +30,9 @@ export function percentFromStatus(statusEntry: StatusEntry) {
     //take average of last 3;
     let last3 = statusEntry.last_attempt_times.slice(-3);
     if (last3.length == 0) return 0;
-    let sum = last3.reduce((p, c) => p + c, 0);
+    let sum = last3.reduce((p, c) => p + percentFromTime(c), 0);
     let avg = sum / last3.length;
-    return percentFromTime(avg);
+    return avg
 }
 
 export const allFacts: Fact[] = []

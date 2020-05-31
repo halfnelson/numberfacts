@@ -106,6 +106,7 @@
 	.status-item {
 		text-align: center;
 		color: white;
+		padding: 0 0.4rem;
 	}
 
 	.set-item {

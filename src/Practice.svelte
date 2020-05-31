@@ -103,13 +103,13 @@ import Feather from './Feather.svelte';
 
 	let prevPercents = null;
 	let newPercents = null;
+	let newPercent = 0;
+	let prevPercent = 0;
 
 	function showResults() {
 		prevPercents = facts.map(f => getStatus(f, $profile.status)).map( x => percentFromStatus(x.status))
-		console.log("attempts", attempts)
-		console.log("prev", prevPercents)
-		//prevPercents = prevPercents.reduce((p,c)=> p+c, 0) / prevPercents.length;
-		//console.log(prevPercent);
+		prevPercent = prevPercents.reduce((p,c)=> p+c, 0) / prevPercents.length;
+		prevPercent = Math.floor(prevPercent)
 		//update the status
 		for (let i = 0; i < attempts.length; i++) {
 			let oldstatus = getStatus(questions[i], $profile.status)
@@ -119,10 +119,8 @@ import Feather from './Feather.svelte';
 		profile.set($profile); //store it
 
 		newPercents	= facts.map(f => getStatus(f, $profile.status)).map( x => percentFromStatus(x.status))
-		console.log("new", prevPercents)
-		//newPercent = newPercents.reduce((p,c)=> p+c, 0) / newPercents.length;
-		//console.log("new", newPercent)
-		console.log($profile.status);
+		newPercent = newPercents.reduce((p,c)=> p+c, 0) / newPercents.length;
+		newPercent = Math.floor(newPercent)
 	}
 
 	function delay(msec) {
@@ -187,13 +185,13 @@ import Feather from './Feather.svelte';
 	{#if state == 'results'}
 		<div class="results">
 			<h2>Results</h2>
-			<h5>Before</h5>
+			<h5>Before - {prevPercent}%</h5>
 			<div class="percent" >
 				{#each facts as fact, i}
 					<span class="fact" style="background-color: hsl({profileHue}, {prevPercents[i]}%, 50%)">{fact.first}x{fact.second}</span>
 				{/each}
 			</div>
-			<h5>After</h5>
+			<h5>After - {newPercent}%</h5>
 			<div class="percent">
 				{#each facts as fact, i}
 					<span class="fact" style="background-color: hsl({profileHue}, {newPercents[i]}%, 50%)">{fact.first}x{fact.second}</span>

@@ -45,11 +45,13 @@
 		<div class="profile">
 			<Profile profile={preview} />
 		</div>
+		<div style="text-align: center">
 		<input
 			class="button-primary"
 			type="submit"
 			value={buttonText}
 			on:click={() => onSave({ name: new_name, color: new_color })} />
+		</div>
 	</div>
 </fieldset>
 
@@ -64,15 +66,19 @@
 
 	.color-picker {
 		display: grid;
-		grid-template-columns: repeat(16, 3rem);
+		grid-template-columns: repeat(8, 1fr);
 		grid-auto-rows: 3rem;
 		margin-bottom: 1rem;
 		grid-gap: 0.2rem;
 	}
 
+	@media (min-width: 40.0rem) { 
+		.color-picker {
+			grid-template-columns: repeat(16, 1fr);
+		}
+	 }
+
 	.color {
-		width: 3rem;
-		height: 3rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;

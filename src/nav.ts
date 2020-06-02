@@ -8,7 +8,7 @@ export type AppPage = {
 
 
 function create_nav() {
-    let { set, subscribe } = writable<AppPage>({page: null})
+    let { set, subscribe } = writable<AppPage>({page: "home"})
     return {
         subscribe,
         navigate(page: AppPage['page'], props?: any) {

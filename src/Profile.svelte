@@ -1,5 +1,5 @@
 <div class="profile">
-    <span class="icon" style="background-color: {profile.color}" ><Feather icon="user" size="3rem" /></span><span class="name">{profile.name}</span>
+    <span class="icon" style="background-color: {profile.color}" ><Feather icon="user" size="2rem" /></span><span class="name">{profile.name}</span>
 </div>
 
 <style>
@@ -7,6 +7,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        height: 100%;
     }
     .icon {
         color: white;
@@ -16,6 +17,7 @@
         line-height: 1;      
         padding: 0.5rem;
         margin-right: 1rem;
+        height: 3rem;
     }
 
     .name {

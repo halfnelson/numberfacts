@@ -5,6 +5,7 @@ import { nav } from './nav';
 	import { getStatus, updateStatus, percentFromStatus, addAttemptToStatus } from './facts';
 	import { profile } from './profile'
 	import { tweened } from 'svelte/motion'
+	import { fade } from 'svelte/transition'
 	import { linear } from 'svelte/easing'
 	
 	import colorConvert from 'color-convert'
@@ -162,7 +163,7 @@ import Feather from './Feather.svelte';
 		</div>
 	{/if}
 	{#if state == 'practice'}
-		<div class="question">
+		<div class="question" >
 			<h4>Q {questionNumber}</h4>
 			<h1 style="color: hsl({profileHue}, {$questionSaturation}%, 50% );">{question.first} x {question.second}</h1>
 			<div class="answers">

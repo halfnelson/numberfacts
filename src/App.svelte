@@ -10,6 +10,7 @@
 	import Practice from "./Practice.svelte";
 
 	import { fly } from "svelte/transition";
+	import AddUser from "./AddUser.svelte";
 
 	onMount(() => {
 		if (!$profile) {
@@ -34,6 +35,10 @@
 						<EditProfile />
 					{:else if $nav.page == 'practice'}
 						<Practice {...$nav.props} />
+					{:else if $nav.page == 'select-profile'}
+						<ProfileManager />
+					{:else if $nav.page == 'add-user'}
+						<AddUser />
 					{/if}
 				</div>
 			</div>
@@ -47,6 +52,7 @@
 		flex-direction: column;
 		width: 100%;
 		height: 100%;
+		user-select: none;
 	}
 	.container {
 		max-width: 80rem;

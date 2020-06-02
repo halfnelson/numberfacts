@@ -1,5 +1,5 @@
-<div class="profile">
-    <span class="icon" style="background-color: {profile.color}" ><Feather icon="user" size="2rem" /></span><span class="name">{profile.name}</span>
+<div class="profile" >
+    <span class="icon" style="background-color: {profile.color}; height: {size+1}rem" ><Feather icon="user" size="{size}rem" /></span><span class="name">{profile.name}</span>
 </div>
 
 <style>
@@ -30,4 +30,6 @@
     import Feather from './Feather.svelte'
 
     export let profile: { name: string, color: string };
+
+    export let size = 2;
 </script>

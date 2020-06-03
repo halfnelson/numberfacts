@@ -16,7 +16,7 @@
 	type State = "intro" | "assess" | "results";
 
 	let state: State = "intro";
-    let facts = allFacts.slice(0, 3);
+    let facts = allFacts.slice();
     let profileHue = 0;
     
    	$: if($profile) { 

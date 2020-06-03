@@ -5,9 +5,9 @@
 	import convert from "color-convert";
 	import { allFacts, getStatus } from "./facts";
 
-	$: status = $profile.status;
+	$: status = $profile && $profile.status;
 
-	$: color_hsl = convert.hex.hsl($profile.color);
+	$: color_hsl = $profile && convert.hex.hsl($profile.color);
 
 	type Fact = {
 		first: number;
@@ -71,29 +71,30 @@
 	}
 </script>
 
-
-	<div class="status-grid" style="--profile-color: {$profile.color}">
-		{#each allFacts as fact}
+	{#if $profile}
+		<div class="status-grid" style="--profile-color: {$profile.color}">
+			{#each allFacts as fact}
+					<div
+						class="status-item"
+						class:selected={findSelected(selected, fact.first, fact.second )}
+						on:click={() => toggleSelected(fact.first, fact.second)}
+						style="grid-column: {fact.second}; grid-row: {fact.first};
+						background-color: hsl({color_hsl[0]}, {saturationFromStatus(getStatus(fact, $profile.status).status)}%,
+						50% )">
+						{fact.first}x{fact.second}
+					</div>
+			{/each}
+			{#each Array(12).fill(0) as _, i}
 				<div
-					class="status-item"
-					class:selected={findSelected(selected, fact.first, fact.second )}
-					on:click={() => toggleSelected(fact.first, fact.second)}
-					style="grid-column: {fact.second}; grid-row: {fact.first};
-					background-color: hsl({color_hsl[0]}, {saturationFromStatus(getStatus(fact, $profile.status).status)}%,
-					50% )">
-					{fact.first}x{fact.second}
+					class="set-item"
+					class:selected={selected_groups.includes(i + 1)}
+					on:click={() => toggleGroup(i + 1)}
+					style="grid-column: {i + 1}; grid-row: {13};">
+					{i + 1}x
 				</div>
-		{/each}
-		{#each Array(12).fill(0) as _, i}
-			<div
-				class="set-item"
-				class:selected={selected_groups.includes(i + 1)}
-				on:click={() => toggleGroup(i + 1)}
-				style="grid-column: {i + 1}; grid-row: {13};">
-				{i + 1}x
-			</div>
-		{/each}
-	</div>
+			{/each}
+		</div>
+	{/if}
 
 
 <style>

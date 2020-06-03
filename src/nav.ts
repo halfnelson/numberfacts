@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store'
 
 export type AppPage = {
-    page: "fresh-install" | "home" | "edit-profile" | "practice" | "select-profile" | "add-user",
+    page: "fresh-install" | "home" | "edit-profile" | "practice" | "select-profile" | "add-user" | "assess",
     props?: any
 }
 

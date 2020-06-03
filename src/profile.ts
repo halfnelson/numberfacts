@@ -7,6 +7,7 @@ export type Profile = {
     name: string;
     color: string;
     status: StatusCollection;
+    lastResults: number[];
 }
 
 function profileKey(id: string) {
@@ -18,7 +19,7 @@ function loadProfile(id: string): Profile {
         if (id) {
             let profstr = localStorage.getItem(profileKey(id));
             if (profstr) { 
-                return JSON.parse(profstr)
+                return JSON.parse(profstr);
             }
         }
     } catch (e) {
@@ -79,7 +80,8 @@ export function create_profiles() {
                 id: String(Date.now()),
                 name,
                 color, 
-                status: []
+                status: [],
+                lastResults: []
             }
             storeProfile(profile);
             profiles = profiles.concat(profile);

@@ -11,6 +11,7 @@
 
 	import { fly } from "svelte/transition";
 	import AddUser from "./AddUser.svelte";
+	import Assess from "./Assess.svelte";
 
 	onMount(() => {
 		if (!$profile) {
@@ -39,6 +40,8 @@
 						<ProfileManager />
 					{:else if $nav.page == 'add-user'}
 						<AddUser />
+					{:else if $nav.page == 'assess'}
+						<Assess />
 					{/if}
 				</div>
 			</div>

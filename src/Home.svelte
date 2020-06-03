@@ -30,7 +30,7 @@
 
 	<div class="practice">
 		<button on:click={() => startPractice()}>Start practice</button>
-		<button class="button-outline">Assess Me!</button>
+		<button on:click={() => nav.navigate("assess")} class="button-outline">Assess Me!</button>
 	</div>
 </div>
 

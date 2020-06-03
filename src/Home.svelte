@@ -1,4 +1,6 @@
-<script>import App from "./App.svelte";
+<script>
+	import { shuffle } from "./util";
+	import App from "./App.svelte";
 
 	import Grid from "./Grid.svelte";
 	import { allFacts, getStatus, percentFromStatus } from './facts'
@@ -11,10 +13,14 @@
 		let practice_set = selected;
 		if (practice_set.length == 0) {
 			let perf = allFacts.map(f => getStatus(f, $profile.status))
+			perf = shuffle(perf);
 			perf.sort((a,b) => {
-				let astatus =percentFromStatus(a.status);
+				let astatus = percentFromStatus(a.status);
 				let bstatus = percentFromStatus(b.status);
-				if (astatus == bstatus) return 0;
+				if (astatus == bstatus) {
+					if (a.status.attempts == b.status.attempts) return 0;
+					return a.status.attempts > b.status.attempts ? 1 : -1;
+				}
 				return astatus > bstatus ? 1 : -1;
 			});
 			practice_set = perf.map(x=>x.fact).slice(0, 12);

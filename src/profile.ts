@@ -89,12 +89,13 @@ export function create_profiles() {
             set(profiles);
             return profile;
         },
-        remove: (profile) => {
-            profiles = profiles.filter(p => p != profile.id);
+        remove: (profile: Profile) => {
+            profiles = profiles.filter(p => p.id != profile.id);
+            storeProfiles(profiles.map(p => p.id));
             set(profiles);
         },
-        update: (profile) => {
-            profiles = profiles.filter(p => p != profile.id).concat(profile);
+        update: (profile: Profile) => {
+            profiles = profiles.filter(p => p.id != profile.id).concat(profile);
             storeProfile(profile);
             set(profiles)
         }

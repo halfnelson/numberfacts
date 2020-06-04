@@ -6,6 +6,7 @@
 	export let name = "";
 	export let color = "#FF0000";
 	export let buttonText = "Save Profile";
+	export let onDelete: () => unknown = null;
 
 	export let onSave: (newval: {
 		color: string;
@@ -15,7 +16,7 @@
 	let hues = new Array(32).fill(0).map((_, i) => Math.floor((i / 32) * 360));
 
 	$: new_name = name;
-	$: new_hue = Math.floor(convert.hex.hsl(color)[0] / 32) * 32;
+	$: new_hue = convert.hex.hsl(color)[0];
 	$: new_color = "#" + convert.hsl.hex(new_hue, 100, 50);
 	$: preview = { id: null, name: new_name || "Your Name", color: new_color };
 </script>
@@ -27,7 +28,7 @@
 		placeholder="Your Name"
 		id="nameField"
 		bind:value={new_name} />
-	<label for="colorField">Colour</label>
+	<label for="colorField">Colour {new_hue}</label>
 	<div class="color-picker">
 		{#each hues as hue}
 			<div
@@ -46,19 +47,22 @@
 			<Profile profile={preview} />
 		</div>
 		<div style="text-align: center">
-		<input
-			class="button-primary"
-			type="submit"
-			value={buttonText}
-			on:click={() => onSave({ name: new_name, color: new_color })} />
+			<button
+				on:click={() => onSave({ name: new_name, color: new_color })}>
+				{buttonText}
+			</button>
+			{#if onDelete}
+				<button
+					class="button-outline"
+					on:click={() => onDelete()}>
+					Delete
+				</button>
+			{/if}
 		</div>
 	</div>
 </fieldset>
 
 <style>
-	.preview {
-		margin-left: 3rem;
-	}
 
 	.profile {
 		margin: 1rem 3rem 2rem 3rem;
@@ -72,11 +76,11 @@
 		grid-gap: 0.2rem;
 	}
 
-	@media (min-width: 40.0rem) { 
+	@media (min-width: 40rem) {
 		.color-picker {
 			grid-template-columns: repeat(16, 1fr);
 		}
-	 }
+	}
 
 	.color {
 		display: flex;

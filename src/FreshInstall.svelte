@@ -14,7 +14,7 @@
 	<div>
 		<h1>Welcome</h1>
 		<p>Please start by creating a profile</p>
+		<ProfileForm buttonText={'Create Profile'} onSave={(p) => addProfile(p)} />
 	</div>
 </div>
 
-<ProfileForm buttonText={'Create Profile'} onSave={(p) => addProfile(p)} />

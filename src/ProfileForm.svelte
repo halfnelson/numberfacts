@@ -28,7 +28,7 @@
 		placeholder="Your Name"
 		id="nameField"
 		bind:value={new_name} />
-	<label for="colorField">Colour {new_hue}</label>
+	<label for="colorField">Colour</label>
 	<div class="color-picker">
 		{#each hues as hue}
 			<div
@@ -85,8 +85,8 @@
 	.color {
 		display: flex;
 		color: white;
+		align-items: center;
+    	justify-content: center;
 	}
-	.color > * {
-		margin:auto;
-	}
+	
 </style>

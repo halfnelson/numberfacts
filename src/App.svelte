@@ -64,9 +64,10 @@
 	.page {
 		display: flex;
 		flex-direction: column;
-		height: 100%;
-		justify-content: safe center;
-		align-content: safe center;
+		min-height: 100%;
+	}
+	.page > * {
+		margin: auto;
 	}
 
 	main {
@@ -74,14 +75,14 @@
 		height: 100%;
 		flex: 1;
 		position:relative;
-		overflow: auto;
 	}
 
 	.wrap {
-		position: absolute;
-		top: 0;
+		position: fixed;
+		top: 51px;
 		right: 0;
 		left: 0;
 		bottom: 0;
+		overflow: auto;
 	}
 </style>

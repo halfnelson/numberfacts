@@ -47,12 +47,4 @@
 		margin-top: 2rem;
 		text-align: center;
 	}
-
-	.vert-center {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
 </style>

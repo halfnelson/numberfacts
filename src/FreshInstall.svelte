@@ -10,7 +10,11 @@
 	}
 </script>
 
-<h1>Welcome</h1>
-<p>Please start by creating a profile</p>
+<div class="vert-center">
+	<div>
+		<h1>Welcome</h1>
+		<p>Please start by creating a profile</p>
+	</div>
+</div>
 
 <ProfileForm buttonText={'Create Profile'} onSave={(p) => addProfile(p)} />

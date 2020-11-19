@@ -23,3 +23,13 @@ button {
     background-color: #444;
     border-color: #444;
 }
+
+.vert-center {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.vert-center > * {
+    margin: auto;
+}

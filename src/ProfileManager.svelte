@@ -1,3 +1,4 @@
+<div class="vert-center">
 <div class="userEditor">
 <h3>Users</h3>
 
@@ -10,7 +11,7 @@
 <button class="add-user" on:click={() => nav.navigate("add-user")}><Feather icon="user-plus" size="2rem" />New User</button>
 
 </div>
-
+</div>
 
 <script>
     import Feather from './Feather.svelte';

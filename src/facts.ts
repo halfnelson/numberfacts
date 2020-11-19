@@ -16,13 +16,15 @@ export type FactStatus = {
 
 export type StatusCollection = FactStatus[]
 
+export const PERFECT_TIME = 5;
 
 export function percentFromTime(time_sec: number) {
-    //our range is 3sec - 10sec
-    let p = Math.max(3, time_sec);
+    //our range is PERFECT_TIME - 10sec
+    let p = Math.max(PERFECT_TIME, time_sec);
     p = Math.min(10, p);
+    const range = 10 - PERFECT_TIME;
 
-    return (7 - (p - 3)) / 7 * 100
+    return (range - (p - PERFECT_TIME)) / range * 100
 }
 
 
@@ -54,7 +56,7 @@ export function newStatus(): StatusEntry {
 export function addAttemptToStatus(status: StatusEntry, time_sec: number) {
     status.attempts = status.attempts + 1;
     status.last_attempt_times.push(time_sec);
-    status.last_attempt_times = status.last_attempt_times.slice(-3);
+    status.last_attempt_times = status.last_attempt_times.slice(-1);
 }
 
 export function getStatus(fact: Fact, collection: StatusCollection): FactStatus {

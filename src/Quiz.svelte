@@ -3,6 +3,7 @@
 	import Feather from "./Feather.svelte";
 	import { tweened } from "svelte/motion";
 	import { linear } from "svelte/easing";
+	import { PERFECT_TIME } from "./facts";
 
 	export let profileHue = 10;
 	export let questionList = [];
@@ -30,7 +31,7 @@
 		let isCorrect = ans == correctAnswer;
 		if (!isCorrect) {
 			attempts.push(60000);
-			await delay(2000);
+			await delay(1000);
 			nextQuestion();
 		}
 
@@ -47,7 +48,7 @@
 	}
 
 	let questionSaturation = tweened(100, {
-		delay: 3000,
+		delay: PERFECT_TIME * 1000,
 		duration: 7000,
 		easing: linear,
 	});
@@ -104,10 +105,10 @@
 	<h1 style="color: hsl({profileHue}, {$questionSaturation}%, 50% );">
 		{question.first} x {question.second}
 	</h1>
-	<div class="answers">
+	<div class="answers" class:incorrect={answered && answered != correctAnswer}>
 		{#each answers as answer}
 			<div class="answer">
-				<h3 on:click={() => answerQuestion(answer)}>{answer}</h3>
+				<h3 class:selected={answered === answer}  on:click={() => answerQuestion(answer)} on:touchstart|preventDefault={() => answerQuestion(answer)}>{answer}</h3>
 				{#if answered}
 					{#if answered == answer && answer != correctAnswer}
 						<span class="incorrect">
@@ -138,15 +139,26 @@
 	.answers {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
-		align-items: center;
 		flex-wrap: wrap;
+	}
+
+	.answers > * {
+		margin: auto;
+	}
+
+	.answers.incorrect {
+		animation: shake 0.4s ease-in-out;
 	}
 
 	.answers h3 {
 		font-size: 5rem;
 		margin: 2.5rem;
 		padding: 0 2rem;
+		border-radius: 90%;
+	}
+
+	.answers h3.selected {
+		animation: clicked 1.0s ease-out;
 	}
 
 	.answer {
@@ -159,7 +171,10 @@
 		top: 0;
 		left: 50%;
 		transform: translate(-50%, -50%) scale(1.5);
+		animation: popup 0.1s ease-out;
 	}
+
+	
 
 	.answer .correct {
 		color: green;
@@ -167,5 +182,50 @@
 
 	.answer .incorrect {
 		color: red;
+	}
+
+	@keyframes clicked {
+		from {
+			background-color: rgba(228,228,228,1)
+		}
+		to {
+			background-color: rgba(228,228,228,0)
+		}
+	}
+
+	@keyframes popup {
+		from {
+			transform: translate(-50%, -20%) scale(1.0);
+			opacity: 0;
+		}
+		90% {
+			transform: translate(-50%, -60%) scale(2.0);
+		}
+		to {
+			transform: translate(-50%, -50%) scale(1.5);
+			opacity: 1;
+		}
+	}
+
+	@keyframes shake {
+		from {
+			transform: translate(0, 0);
+		}
+		20% {
+			transform: translate(-10px,0);
+		}
+		40% {
+			transform: translate(+10px,0);
+		}
+		60% {
+			transform: translate(-10px,0);
+		}
+		80% {
+			transform: translate(+10px,0);
+		}
+		to {
+			transform: translate(0, 0);
+		}
+		
 	}
 </style>

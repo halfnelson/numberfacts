@@ -65,7 +65,7 @@
 
 </script>
 
-<div class="practice">
+<div class="practice vert-center">
 	{#if state == 'intro'}
 		<div class="intro">
 			<h2>Practice Mode</h2>
@@ -101,9 +101,10 @@
 	.practice {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		flex: 1;
+	}
+	.practice > * {
+		margin: auto;
 	}
 
 	.intro {

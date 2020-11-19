@@ -61,7 +61,7 @@
 
 </script>
 
-<div class="assess">
+<div class="assess vert-center">
 	{#if state == 'intro'}
 		<div class="intro">
 			<h2>Assessment</h2>
@@ -114,9 +114,11 @@
 	.assess {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
 		flex: 1;
+	}
+
+	.assess > * {
+		margin: auto
 	}
 
 	.intro {
